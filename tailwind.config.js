@@ -7,6 +7,7 @@ module.exports = {
     extend: {}
   },
   variants: {
+    borderWidth: ['last'],
     textColor: ['responsive', 'hover', 'focus', 'group-hover'],
   },
   plugins: [

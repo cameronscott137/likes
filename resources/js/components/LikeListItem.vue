@@ -1,5 +1,5 @@
 <template>
-    <article class="border-b-2 border-gray-300">
+    <article class="border-b-2 last:border-b border-gray-300">
         <header class="flex items-center cursor-pointer bg-gray-100 py-3 px-6  border-b border-gray-200" @click="openProfile">
             <img class="rounded-full" :src="like.author_avatar_url">
             <div class="ml-2">
