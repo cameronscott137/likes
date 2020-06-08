@@ -9,7 +9,10 @@ class LikesController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $likes = Like::all();
+        $likes = Like::whereSearch($request->term)
+            ->offset($request->offset)
+            ->limit(40)
+            ->get();
         return view('likes.index', compact('likes'));
     }
 }

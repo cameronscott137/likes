@@ -28,4 +28,21 @@ class LikeTest extends TestCase
         ]);
         $this->assertEquals($newLike->created_at, $newDate->diffForHumans());
     }
+
+    /**
+     * @test
+     * TODO
+     */
+    public function likes_can_be_searched()
+    {
+
+    }
+
+    /**
+     * @test
+     * TODO
+     */
+    public function like_model_can_return_oldest_twitter_id()
+    {
+    }
 }

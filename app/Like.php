@@ -27,6 +27,17 @@ class Like extends Model
         return $date->format('m/d/Y');
     }
 
+    public function scopeWhereSearch($query, $search)
+    {
+        foreach (explode(' ', $search) as $term) {
+            $query->where(function ($query) use ($term) {
+                $query->where('text', 'LIKE', '%' . $term . '%')
+                    ->orWhere('author_name', 'LIKE', '%' . $term . '%')
+                    ->orWhere('author_username', 'LIKE', '%' . $term . '%');
+            });
+        }
+    }
+
     /**
      * See if Like exists via Twitter ID. If no match is found,
      * store the new like.
