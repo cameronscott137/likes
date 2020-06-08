@@ -87,7 +87,7 @@ class Like extends Model
             $textWithLinksRemoved
         );
         $textWithMentionsLinked = preg_replace(
-            '/@([^@ |^@’|^@:]+)/',
+            '/@([^@ |^@’|^@:|^@.]+)/',
             '<a class="text-blue-500 hover:text-blue-700 underline" target="_blank" href="https://twitter.com/$1">$0</a>',
             $textwithHashtagsLinked
         );

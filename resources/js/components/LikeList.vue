@@ -1,9 +1,7 @@
 <template>
-    <main class="max-w-lg mx-auto">
-        <section class="shadow bg-white">
-            <like-list-item v-for="like in likesArray" :key="like.id" :like="like"></like-list-item>
-        </section>
-    </main>
+    <section class="bg-white shadow-lg md:mx-0 mx-4">
+        <like-list-item v-for="like in likesArray" :key="like.id" :like="like"></like-list-item>
+    </section>
 </template>
 
 <script>
