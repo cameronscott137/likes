@@ -27,4 +27,24 @@ class Like extends Model
         }
         return $date->format('m/d/Y');
     }
+
+    /**
+     * See if Like exists via Twitter ID. If no match is found,
+     * store the new like.
+     *
+     * @param array $like
+     * @return Like
+     */
+    public static function findOrCreate(array $like)
+    {
+        $existingLike = self::where('twitter_id', $like['id'])->first();
+        if ($existingLike) return;
+        return self::create([
+            'twitter_id' => $like['id'],
+            'text' => $like['full_text'],
+            'author_name' => $like['user']['name'],
+            'author_username' => $like['user']['screen_name'],
+            'author_avatar_url' => $like['user']['profile_image_url_https']
+        ]);
+    }
 }

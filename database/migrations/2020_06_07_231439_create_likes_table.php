@@ -15,7 +15,7 @@ class CreateLikesTable extends Migration
     {
         Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->integer('twitter_id')->index()->unique();
+            $table->string('twitter_id')->unique();
             $table->text('text');
             $table->string('author_name');
             $table->string('author_username');
