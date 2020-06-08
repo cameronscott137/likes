@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Like;
 use Illuminate\Http\Request;
+use Log;
 
 class LikesController extends Controller
 {
@@ -11,9 +12,16 @@ class LikesController extends Controller
     {
         $likes = Like::whereSearch($request->term)
             ->offset($request->offset)
-            ->limit(40)
-            // ->orderBy('created_at', 'asc')
-            ->get();
-        return view('likes.index', compact('likes'));
+            ->limit(40);
+
+        Log::info($request->offset);
+
+        if ($request->expectsJson()) {
+            return response($likes->get(), 200);
+        }
+
+        return view('likes.index', [
+            'likes' => $likes->get()
+        ]);
     }
 }
