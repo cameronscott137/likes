@@ -36,7 +36,7 @@ class RemoveLike extends Command
         $like = Like::where('twitter_id', $twitterId)->first();
         if (!$like) return $this->error("No Like exists with that Twitter ID");
         try {
-            $twitter->destroyLike(1116659043710439424);
+            $twitter->destroyLike($like->twitter_id);
         } catch (RequestException $e) {
             return $this->error("Removing the like from Twitter failed with the following output: {$e->getMessage()}");
         }
