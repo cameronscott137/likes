@@ -51,7 +51,7 @@ class Like extends Model
         if ($existingLike) return;
         return self::create([
             'twitter_id' => $like['id'],
-            'text' => $like['full_text'],
+            'text' => self::parseLikeText($like['full_text']),
             'author_name' => $like['user']['name'],
             'author_username' => $like['user']['screen_name'],
             'author_avatar_url' => $like['user']['profile_image_url_https'],
@@ -68,5 +68,25 @@ class Like extends Model
     public static function oldestTwitterId()
     {
         return self::orderBy('twitter_id', 'asc')->first()->twitter_id;
+    }
+
+    public static function parseLikeText($text)
+    {
+        $textWithLinksRemoved = preg_replace(
+            '/\b(?:(?:https|ftp):\/\/)?\w[\w-]*(?:\.[\w-]+)+\S*/',
+            '',
+            $text
+        );
+        $textwithHashtagsLinked = preg_replace(
+            '/#([^# ]+)/',
+            '<a class="text-blue-500 hover:text-blue-700 underline" target="_blank" href="https://twitter.com/hashtag/$1">$0</a>',
+            $textWithLinksRemoved
+        );
+        $textWithMentionsLinked = preg_replace(
+            '/@([^@ |^@’|^@:]+)/',
+            '<a class="text-blue-500 hover:text-blue-700 underline" target="_blank" href="https://twitter.com/$1">$0</a>',
+            $textwithHashtagsLinked
+        );
+        return trim($textWithMentionsLinked);
     }
 }

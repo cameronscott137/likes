@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Like;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -44,5 +45,19 @@ class LikeTest extends TestCase
      */
     public function like_model_can_return_oldest_twitter_id()
     {
+    }
+
+    /**
+     * @test
+     * TODO
+     */
+    public function like_text_can_have_hashtags_and_mentions_linked()
+    {
+        $text = "Something I wish I’d said more clearly in this piece: The people raising valid points about the methodological limits or @samswey’s #8cantwait work have not exactly brought a ton in the way of better evidence to back up other ideas.";
+        $revisedText = Like::parseLikeText($text);
+        $this->assertEquals(
+            $revisedText,
+            'Something I wish I’d said more clearly in this piece: The people raising valid points about the methodological limits or <a class="text-blue-400 hover:text-blue-700 underline" target="_blank" href="https://twitter.com/samswey">@samswey</a>’s <a class="text-blue-400 hover:text-blue-700 underline" target="_blank" href="https://twitter.com/hashtag/8cantwait">#8cantwait</a> work have not exactly brought a ton in the way of better evidence to back up other ideas.'
+        );
     }
 }
