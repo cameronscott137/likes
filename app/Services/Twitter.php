@@ -48,6 +48,7 @@ class Twitter extends Model
             // dd($like);
             $like = Like::findOrCreate($like);
         }
+        Log::info(count($likes));
         if (count($likes) > 0) {
             sleep(13); // Sleep for just long enough to avoid rate limiting.
             $this->syncLikes(Like::oldestTwitterId());
@@ -62,5 +63,11 @@ class Twitter extends Model
         }
         $response = $this->client->get($url);
         return json_decode($response->getBody(), true);
+    }
+
+    public function destroyLike($likeId)
+    {
+        $url = "/1.1/favorites/destroy.json?id={$likeId}";
+        $response = $this->client->post($url);
     }
 }

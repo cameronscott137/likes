@@ -1,6 +1,11 @@
 <template>
     <article class="border-b border-gray-300 p-4">
         <div class="mb-4" v-html="like.text"></div>
+        <div v-if="like.media">
+            <div v-for="image in like.media" :key="image.id">
+                <img :src="image.media_url">
+            </div>
+        </div>
         <div v-if="like.urls">
             <a class="block text-sm mb-5 text-blue-500 hover:text-blue-700 underline" v-for="url in like.urls" :key="url.id" :href="url.expanded_url" target="_blank" @click.stop>
                 {{ url.expanded_url }}

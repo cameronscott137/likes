@@ -34,7 +34,8 @@ class Like extends Model
             $query->where(function ($query) use ($term) {
                 $query->where('text', 'LIKE', '%' . $term . '%')
                     ->orWhere('author_name', 'LIKE', '%' . $term . '%')
-                    ->orWhere('author_username', 'LIKE', '%' . $term . '%');
+                    ->orWhere('author_username', 'LIKE', '%' . $term . '%')
+                    ->orWhere('urls', 'LIKE', '%' . $term . '%');
             });
         }
     }

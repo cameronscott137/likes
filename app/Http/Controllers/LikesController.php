@@ -12,6 +12,7 @@ class LikesController extends Controller
         $likes = Like::whereSearch($request->term)
             ->offset($request->offset)
             ->limit(40)
+            ->orderBy('created_at', 'asc')
             ->get();
         return view('likes.index', compact('likes'));
     }
