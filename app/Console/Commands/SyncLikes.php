@@ -13,7 +13,7 @@ class SyncLikes extends Command
      *
      * @var string
      */
-    protected $signature = 'cameron:fetch-likes';
+    protected $signature = 'cameron:sync-likes';
 
     /**
      * The console command description.
