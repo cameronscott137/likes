@@ -20,6 +20,8 @@ class CreateLikesTable extends Migration
             $table->string('author_name');
             $table->string('author_username');
             $table->string('author_avatar_url');
+            $table->text('urls')->nullable();
+            $table->text('media')->nullable();
             $table->timestamps();
         });
     }

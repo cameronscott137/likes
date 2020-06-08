@@ -45,6 +45,7 @@ class Twitter extends Model
     public function syncLikes($likeId = null) {
         $likes = $this->fetchLikes($likeId);
         foreach ($likes as $like) {
+            // dd($like);
             $like = Like::findOrCreate($like);
         }
         if (count($likes) > 0) {

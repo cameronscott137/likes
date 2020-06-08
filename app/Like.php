@@ -11,7 +11,9 @@ class Like extends Model
     protected $guarded = [''];
 
     protected $casts = [
-        'twitter_id' => 'integer'
+        'media' => 'array',
+        'twitter_id' => 'integer',
+        'urls' => 'array'
     ];
 
     protected $dates = [
@@ -55,6 +57,8 @@ class Like extends Model
             'author_name' => $like['user']['name'],
             'author_username' => $like['user']['screen_name'],
             'author_avatar_url' => $like['user']['profile_image_url_https'],
+            'urls' => (count($like['entities']['urls']) ? $like['entities']['urls'] : null),
+            'media' => (isset($like['entities']['media']) ? $like['entities']['media'] : null),
             'created_at' => Carbon::parse($like['created_at'])
         ]);
     }
