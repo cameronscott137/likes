@@ -14,7 +14,7 @@
             <div v-if="like.media">
                 <div v-for="image in like.media" :key="image.id" class="mb-5">
                     <a :href="image.media_url_https" target="_blank">
-                        <div class="w-full h-64 rounded bg-cover bg-center border border-gray-400" :style="`background-image: url('${image.media_url}')`"></div>
+                        <div class="w-full h-64 rounded bg-cover bg-center border border-gray-400" :style="`background-image: url('${image.media_url_https}')`"></div>
                     </a>
                 </div>
             </div>
