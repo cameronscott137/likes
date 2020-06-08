@@ -12,7 +12,6 @@ class Like extends Model
 
     protected $casts = [
         'media' => 'array',
-        'twitter_id' => 'integer',
         'urls' => 'array'
     ];
 
