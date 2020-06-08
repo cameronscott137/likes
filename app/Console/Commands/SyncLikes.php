@@ -20,7 +20,7 @@ class SyncLikes extends Command
      *
      * @var string
      */
-    protected $description = 'Fetches Likes from the Twitter API';
+    protected $description = 'Sync Likes from the Twitter API';
 
     /**
      * Execute the console command.
@@ -29,9 +29,6 @@ class SyncLikes extends Command
      */
     public function handle(Twitter $twitter)
     {
-        $likes = $twitter->fetchLikes();
-        foreach ($likes as $like) {
-            $like = Like::findOrCreate($like);
-        }
+        $twitter->syncLikes();
     }
 }

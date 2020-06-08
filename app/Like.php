@@ -8,12 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Like extends Model
 {
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $guarded = [''];
+
+    protected $casts = [
+        'twitter_id' => 'integer'
+    ];
 
     protected $dates = [
         'created_at',
@@ -44,7 +43,19 @@ class Like extends Model
             'text' => $like['full_text'],
             'author_name' => $like['user']['name'],
             'author_username' => $like['user']['screen_name'],
-            'author_avatar_url' => $like['user']['profile_image_url_https']
+            'author_avatar_url' => $like['user']['profile_image_url_https'],
+            'created_at' => Carbon::parse($like['created_at'])
         ]);
+    }
+
+    /**
+     * Return oldest Like in the system, as determined by Twitter ID,
+     * so that API calls can be offset.
+     *
+     * @return string
+     */
+    public static function oldestTwitterId()
+    {
+        return self::orderBy('twitter_id', 'asc')->first()->twitter_id;
     }
 }

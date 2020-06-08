@@ -2,10 +2,13 @@
 
 namespace App\Services;
 
+use App\Like;
+
 use GuzzleHttp\Client;
 use GuzzleHttp\Subscriber\Oauth\Oauth1;
 use GuzzleHttp\HandlerStack;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class Twitter extends Model
 {
@@ -39,9 +42,24 @@ class Twitter extends Model
         return $client;
     }
 
-    public function fetchLikes()
+    public function syncLikes($likeId = null) {
+        $likes = $this->fetchLikes($likeId);
+        foreach ($likes as $like) {
+            $like = Like::findOrCreate($like);
+        }
+        if (count($likes) > 0) {
+            sleep(13); // Sleep for just long enough to avoid rate limiting.
+            $this->syncLikes(Like::oldestTwitterId());
+        }
+    }
+
+    public function fetchLikes($likeId = null)
     {
-        $response = $this->client->get('/1.1/favorites/list.json?tweet_mode=extended');
+        $url = '/1.1/favorites/list.json?tweet_mode=extended';
+        if ($likeId) {
+            $url = "{$url}&max_id={$likeId}";
+        }
+        $response = $this->client->get($url);
         return json_decode($response->getBody(), true);
     }
 }
