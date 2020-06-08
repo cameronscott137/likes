@@ -26,7 +26,7 @@
 
 </head>
 
-<body class="antialiased text-black">
+<body class="antialiased text-black bg-gray-200">
     <div id="app">
         @yield('content')
     </div>

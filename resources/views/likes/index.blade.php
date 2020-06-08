@@ -3,11 +3,13 @@
 @section('title', "Cameron's Likes")
 
 @section('content')
-<main class="max-w-lg mx-auto">
+<main class="max-w-lg mx-auto bg-white">
     <section class="shadow">
         @foreach($likes as $like)
         <article class="border-b border-gray-300 p-4">
-            {{ $like->text }}
+            <div class="mb-4">
+                {{ $like->text }}
+            </div>
             <footer class="flex items-center">
                 <img class="rounded-full" src="{{ $like->author_avatar_url }}">
                 <div class="ml-2">

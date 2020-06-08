@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.0"
     },
     "require-dev": {
+        "codedungeon/phpunit-result-printer": "^0.27.0",
         "facade/ignition": "^2.0",
         "fzaninotto/faker": "^1.9.1",
         "laravel-frontend-presets/tailwindcss": "^4.1",
@@ -45,7 +46,10 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
-        }
+        },
+        "files": [
+            "tests/Utilities/functions.php"
+        ]
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
