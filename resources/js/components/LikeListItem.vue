@@ -2,18 +2,16 @@
     <article class="border-b-2 last:border-b border-gray-300 bg-white mb-2">
         <header class="flex items-center cursor-pointer pt-6 px-8 " @click="openProfile">
             <img class="rounded-full w-10 h-10" :src="like.author_avatar_url">
-            <div class="ml-2">
-                <p class="text-sm font-bold hover:text-blue-500">
+            <div class="ml-2 leading-tight">
+                <p class="text-sm font-bold md:inline-block">
                     {{ like.author_name }}
-                    <span class="block md:inline-block">
-                        <span class="inline-block ml-1 text-xs text-gray-600 font-normal">
-                            @{{ like.author_username }}
-                        </span>
-                        <a :href="`https://twitter.com/${this.like.author_username}/status/${this.like.twitter_id}`" target="_blank" class="inline-block inline-block text-xs text-gray-600 hover:text-blue-500 font-normal">
-                            • {{ like.created_at }}
-                        </a>
-                    </span>
                 </p>
+                <span class="inline-block md:ml-1 text-xs text-gray-600 font-normal">
+                    @{{ like.author_username }}
+                </span>
+                <a :href="`https://twitter.com/${this.like.author_username}/status/${this.like.twitter_id}`" target="_blank" class="inline-block inline-block text-xs text-gray-600 hover:text-blue-500 font-normal">
+                    • {{ like.created_at }}
+                </a>
             </div>
         </header>
         <div class="px-8 pt-4 pb-6">
