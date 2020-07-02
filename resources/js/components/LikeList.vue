@@ -1,6 +1,10 @@
 <template>
     <section class="md:mx-0 mx-4">
         <like-list-item v-for="like in likesArray" :key="like.id" :like="like"></like-list-item>
+        <div v-if="likesArray.length == 0" class="border-b-2 last:border-b border-gray-300 bg-white mb-2 px-12 py-8 text-center">
+            <h2 class="text-lg font-bold mb-2">No tweets match your search</h2>
+            <p>You can search by the text of the tweet, the author's name, or their username.</p>
+        </div>
     </section>
 </template>
 
