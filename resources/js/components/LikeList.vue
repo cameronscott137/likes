@@ -1,5 +1,5 @@
 <template>
-    <section class="bg-white shadow md:mx-0 mx-4">
+    <section class="md:mx-0 mx-4">
         <like-list-item v-for="like in likesArray" :key="like.id" :like="like"></like-list-item>
     </section>
 </template>

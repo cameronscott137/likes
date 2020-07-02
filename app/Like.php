@@ -22,10 +22,10 @@ class Like extends Model
     public function getCreatedAtAttribute($value)
     {
         $date = Carbon::parse($value);
-        if ($date > Carbon::now()->subDay()) {
+        if ($date > Carbon::now()->subMonth()) {
             return $date->diffForHumans();
         }
-        return $date->format('m/d/Y');
+        return $date->format('n/j/Y');
     }
 
     public function scopeWhereSearch($query, $search)

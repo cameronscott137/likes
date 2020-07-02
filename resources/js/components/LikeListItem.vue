@@ -1,15 +1,22 @@
 <template>
-    <article class="border-b-2 last:border-b border-gray-300">
-        <header class="flex items-center cursor-pointer bg-gray-100 py-3 px-6  border-b border-gray-200" @click="openProfile">
-            <img class="rounded-full" :src="like.author_avatar_url">
+    <article class="border-b-2 last:border-b border-gray-300 bg-white mb-2">
+        <header class="flex items-center cursor-pointer pt-6 px-8 " @click="openProfile">
+            <img class="rounded-full w-10 h-10" :src="like.author_avatar_url">
             <div class="ml-2">
-                <p class="text-sm font-bold" v-text="like.author_name"></p>
-                <p class="text-xs text-gray-600">
-                    Tweeted {{ like.created_at }}
+                <p class="text-sm font-bold hover:text-blue-500">
+                    {{ like.author_name }}
+                    <span class="block md:inline-block">
+                        <span class="inline-block ml-1 text-xs text-gray-600 font-normal">
+                            @{{ like.author_username }}
+                        </span>
+                        <a :href="`https://twitter.com/${this.like.author_username}/status/${this.like.twitter_id}`" target="_blank" class="inline-block inline-block text-xs text-gray-600 hover:text-blue-500 font-normal">
+                            • {{ like.created_at }}
+                        </a>
+                    </span>
                 </p>
             </div>
         </header>
-        <div class="px-6 py-6">
+        <div class="px-8 pt-4 pb-6">
             <div class="mb-4" v-html="like.text"></div>
             <div v-if="like.media">
                 <div v-for="image in like.media" :key="image.id" class="mb-5">
@@ -45,9 +52,6 @@ export default {
     methods: {
         openProfile() {
             window.open(`https://twitter.com/${this.like.author_username}`, "_blank");
-        },
-        openTweet() {
-            window.open(`https://twitter.com/${this.like.author_username}/status/${this.like.twitter_id}`, "_blank");
         }
     }
 }
