@@ -32,12 +32,11 @@ export default {
                 axios.get(`${window.origin}?offset=${this.offset}&term=${this.searchTerm}`)
                     .then(response => {
                         this.likesArray = this.likesArray.concat(response.data)
-                        this.offset = (this.offset + 40)
+                        this.offset = (this.offset + 40);
+                        this.loadingFeed = false;
                     })
                     .catch((error) => {
                         console.log(error);
-                    }).finally(() => {
-                        this.loadingFeed = false
                     });
         });
         }
