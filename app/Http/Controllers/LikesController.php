@@ -13,14 +13,15 @@ class LikesController extends Controller
         $likes = Like::whereSearch($request->term)
             ->orderBy('created_at', 'desc')
             ->offset($request->offset)
-            ->limit(40);
+            ->limit(40)
+            ->get();
 
         if ($request->expectsJson()) {
-            return response($likes->get(), 200);
+            return response($likes, 200);
         }
 
         return view('likes.index', [
-            'likes' => $likes->get()
+            'likes' => $likes
         ]);
     }
 }
