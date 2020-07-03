@@ -4,6 +4,7 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class Like extends Model
 {
@@ -30,7 +31,11 @@ class Like extends Model
 
     public function scopeWhereSearch($query, $search)
     {
+
+        if ($search == "null") return $query;
+
         foreach (explode(' ', $search) as $term) {
+            Log::info("term: " . $term);
             $query->where(function ($query) use ($term) {
                 $query->where('text', 'LIKE', '%' . $term . '%')
                     ->orWhere('author_name', 'LIKE', '%' . $term . '%')
