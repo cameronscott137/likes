@@ -8,6 +8,8 @@ use Tests\TestCase;
 
 class SyncLikesTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * @test
      * TODO

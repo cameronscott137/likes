@@ -8,6 +8,8 @@ use Tests\TestCase;
 
 class RemoveLinkTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * @test
      * TODO
